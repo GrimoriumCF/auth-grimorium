@@ -1,0 +1,37 @@
+server:
+  port: 80  # Mudar para porta padrão HTTP, ou 443 para HTTPS
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_URL_PRD}:${DB_PORT}/${DB_NAME}  # Atualize com o endereço do banco de dados de produção
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  auth:
+    secret: ${API_AUTH_SECRET}
+eureka:
+  instance:
+    hostname: ${EUREKA_HOSTNAME}
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVICE_URL}/registry/eureka
+
+# Springdoc OpenApi 3.1 & Swagger 3
+# Desativar ou restringir o acesso em produção se necessário
+springdoc:
+  packagesToScan: br.com.grimorium.authms.controller
+  swagger-ui:
+    path: /docs-grimorium.html
+  api-docs:
+    path: /docs-grimorium
+
