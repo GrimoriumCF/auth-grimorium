@@ -1,5 +1,5 @@
 server:
-  port: 80  # Mudar para porta padrão HTTP, ou 443 para HTTPS
+  port: 8080  # Mudar para porta padrão HTTP, ou 443 para HTTPS
 
 spring:
   datasource:
