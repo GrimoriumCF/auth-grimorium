@@ -1,6 +1,9 @@
 server:
-  port: 8080
+  port: 8081
+
 spring:
+  application:
+    name: grimorium-auth
   datasource:
     url: jdbc:postgresql://localhost:5432/auth-ms
     username: postgres
@@ -13,17 +16,27 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
 api:
   auth:
     secret: 62e360a697e64542a5d27f07048ffcf2
-eureka:
-  instance:
-    hostname: localhosts
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/registry/eureka
 
-# Springdoc OpenApi 3.1 & Swagger 3
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  file:
+    name: ./logs/log-file.log
 springdoc:
   packagesToScan: br.com.grimorium.authms.controller
   swagger-ui:
